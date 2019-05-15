@@ -9,7 +9,6 @@ using Zenject;
 
 namespace RemoteSettingsSample.Data.Repository.Implement
 {
-    // DataStore として UnityEngine.RemoteSettings の Wrapper を作る手もあるが、冗長なのでやらない
     public class SettingHandler : IInitializable, ISettingReloadable, ISettingReadable
     {
         private ISubject<Unit> OnCompletedSubject { get; } = new Subject<Unit>();
