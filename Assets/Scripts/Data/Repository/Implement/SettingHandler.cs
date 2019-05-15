@@ -21,7 +21,7 @@ namespace RemoteSettingsSample.Data.Repository.Implement
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch ((HttpStatusCode) serverResponse)
                 {
-                    case HttpStatusCode.OK when wasUpdatedFromServer && settingsChanged:
+                    case HttpStatusCode.OK:
                         OnCompletedSubject.OnNext(Unit.Default);
                         break;
                 }
