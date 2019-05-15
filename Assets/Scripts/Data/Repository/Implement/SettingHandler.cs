@@ -1,39 +1,30 @@
 using System;
-using System.Net;
+using Data.Repository.Interface.DataStore;
 using RemoteSettingsSample.Application;
 using RemoteSettingsSample.Application.Enum;
 using RemoteSettingsSample.Domain.UseCase.Interface.Repository;
 using UniRx;
-using UnityEngine;
-using Zenject;
 
 namespace RemoteSettingsSample.Data.Repository.Implement
 {
-    public class SettingHandler : IInitializable, ISettingReloadable, ISettingReadable
+    public class SettingHandler : ISettingReloadable, ISettingReadable
     {
-        private ISubject<Unit> OnCompletedSubject { get; } = new Subject<Unit>();
-
-        void IInitializable.Initialize()
+        public SettingHandler(ISettingReloader settingReloader, ISettingReader settingReader)
         {
-            RemoteSettings.Completed += (wasUpdatedFromServer, settingsChanged, serverResponse) =>
-            {
-                // ReSharper disable once SwitchStatementMissingSomeCases
-                switch ((HttpStatusCode) serverResponse)
-                {
-                    case HttpStatusCode.OK:
-                        OnCompletedSubject.OnNext(Unit.Default);
-                        break;
-                }
-            };
+            SettingReloader = settingReloader;
+            SettingReader = settingReader;
         }
 
-        IObservable<Unit> ISettingReloadable.OnReloadAsObservable() =>
-            OnCompletedSubject;
+        private ISettingReloader SettingReloader { get; }
+        private ISettingReader SettingReader { get; }
 
         void ISettingReloadable.Reload() =>
-            RemoteSettings.ForceUpdate();
+            SettingReloader.Reload();
+
+        IObservable<Unit> ISettingReloadable.OnReloadAsObservable() =>
+            SettingReloader.OnReloadAsObservable();
 
         Season ISettingReadable.ReadSeason() =>
-            (Season) RemoteSettings.GetInt(Const.RemoteSettingKey.Season);
+            (Season) SettingReader.ReadInt(Const.RemoteSettingKey.Season);
     }
 }
