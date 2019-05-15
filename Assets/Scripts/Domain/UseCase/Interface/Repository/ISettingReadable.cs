@@ -2,7 +2,7 @@ using RemoteSettingsSample.Application.Enum;
 
 namespace RemoteSettingsSample.Domain.UseCase.Interface.Repository
 {
-    public interface ISettingReader
+    public interface ISettingReadable
     {
         Season ReadSeason();
     }

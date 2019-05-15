@@ -10,7 +10,7 @@ using Zenject;
 namespace RemoteSettingsSample.Data.Repository.Implement
 {
     // DataStore として UnityEngine.RemoteSettings の Wrapper を作る手もあるが、冗長なのでやらない
-    public class SettingHandler : IInitializable, ISettingReloader, ISettingReader
+    public class SettingHandler : IInitializable, ISettingReloadable, ISettingReadable
     {
         private ISubject<Unit> OnCompletedSubject { get; } = new Subject<Unit>();
 
@@ -28,13 +28,13 @@ namespace RemoteSettingsSample.Data.Repository.Implement
             };
         }
 
-        IObservable<Unit> ISettingReloader.OnReloadAsObservable() =>
+        IObservable<Unit> ISettingReloadable.OnReloadAsObservable() =>
             OnCompletedSubject;
 
-        void ISettingReloader.Reload() =>
+        void ISettingReloadable.Reload() =>
             RemoteSettings.ForceUpdate();
 
-        Season ISettingReader.ReadSeason() =>
+        Season ISettingReadable.ReadSeason() =>
             (Season) RemoteSettings.GetInt(Const.RemoteSettingKey.Season);
     }
 }
