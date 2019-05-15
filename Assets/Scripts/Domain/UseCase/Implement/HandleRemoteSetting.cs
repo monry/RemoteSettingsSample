@@ -8,12 +8,12 @@ namespace RemoteSettingsSample.Domain.UseCase.Implement
 {
     public class HandleRemoteSetting : IInitializable
     {
-        public HandleRemoteSetting(ISeasonState seasonState, IRefreshHandler refreshHandler, ISettingReloader settingReloader, ISettingReader settingReader)
+        public HandleRemoteSetting(ISeasonState seasonState, IRefreshHandler refreshHandler, ISettingReloadable settingReloadable, ISettingReadable settingReadable)
         {
             SeasonState = seasonState;
             RefreshHandler = refreshHandler;
-            SettingReloader = settingReloader;
-            SettingReader = settingReader;
+            SettingReloadable = settingReloadable;
+            SettingReadable = settingReadable;
         }
 
         // Entities
@@ -23,17 +23,17 @@ namespace RemoteSettingsSample.Domain.UseCase.Implement
         private IRefreshHandler RefreshHandler { get; }
 
         // Repositories
-        private ISettingReloader SettingReloader { get; }
-        private ISettingReader SettingReader { get; }
+        private ISettingReloadable SettingReloadable { get; }
+        private ISettingReadable SettingReadable { get; }
 
         void IInitializable.Initialize()
         {
             RefreshHandler
                 .OnRefreshAsObservable()
-                .Subscribe(_ => SettingReloader.Reload());
-            SettingReloader
+                .Subscribe(_ => SettingReloadable.Reload());
+            SettingReloadable
                 .OnReloadAsObservable()
-                .Subscribe(_ => SeasonState.Value = SettingReader.ReadSeason());
+                .Subscribe(_ => SeasonState.Value = SettingReadable.ReadSeason());
         }
     }
 }
