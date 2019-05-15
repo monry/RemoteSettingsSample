@@ -25,10 +25,11 @@ namespace RemoteSettingsSample.Presentation.View.Implement
 
         private void RenderTextAsTypeWriter(string text)
         {
+            TextMeshProUGUI.text = string.Empty;
             DisposableTypeWriter?.Dispose();
             DisposableTypeWriter = text
                 .ToObservable()
-                .Delay(TimeSpan.FromSeconds(0.1f))
+                .Delay(TimeSpan.FromSeconds(0.25f))
                 .Subscribe(x => TextMeshProUGUI.text += x);
         }
     }

@@ -6,6 +6,13 @@ namespace RemoteSettingsSample.Domain.UseCase.Implement
 {
     public class ChangeSeasonText : IInitializable
     {
+        public ChangeSeasonText(ISeasonTextMaster seasonTextMaster, ISeasonState seasonState, SignalBus signalBus)
+        {
+            SeasonTextMaster = seasonTextMaster;
+            SeasonState = seasonState;
+            SignalBus = signalBus;
+        }
+
         // Entities
         private ISeasonTextMaster SeasonTextMaster { get; }
         private ISeasonState SeasonState { get; }

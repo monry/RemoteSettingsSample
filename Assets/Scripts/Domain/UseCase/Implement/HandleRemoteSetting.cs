@@ -8,6 +8,15 @@ namespace RemoteSettingsSample.Domain.UseCase.Implement
 {
     public class HandleRemoteSetting : IInitializable
     {
+        public HandleRemoteSetting(ISeasonState seasonState, IRefreshHandler refreshHandler, ISettingReloader settingReloader, ISettingReader settingReader)
+        {
+            SeasonState = seasonState;
+            RefreshHandler = refreshHandler;
+            SettingReloader = settingReloader;
+            SettingReader = settingReader;
+        }
+
+        // Entities
         private ISeasonState SeasonState { get; }
 
         // Presenters

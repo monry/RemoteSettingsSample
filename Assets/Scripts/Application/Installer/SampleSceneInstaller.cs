@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RemoteSettingsSample.Application.Message;
 using RemoteSettingsSample.Application.ValueObject;
 using RemoteSettingsSample.Data.Repository.Implement;
 using RemoteSettingsSample.Domain.Entity.Implement;
@@ -32,6 +33,12 @@ namespace RemoteSettingsSample.Application.Installer
 
             // ValueObjects
             Container.BindInstance(SeasonTexts);
+
+            // Messages
+            Container.BindFactory<SeasonInformation, SeasonText, SeasonText.Factory.FromSeasonInformation>().AsCached();
+
+            // Signals
+            Container.DeclareSignal<SeasonText>();
         }
     }
 }
