@@ -10,7 +10,7 @@ using Zenject;
 
 namespace RemoteSettingsSample.Domain.Entity
 {
-    public class SeasonTextMasterTest : ZenjectUnitTestFixture
+    public class SeasonMasterTest : ZenjectUnitTestFixture
     {
         [SetUp]
         public void Install()
@@ -19,17 +19,18 @@ namespace RemoteSettingsSample.Domain.Entity
                 .BindInstance(
                     new List<SeasonInformation>
                     {
-                        new SeasonInformation(Season.Spring, "春", "春 is spring", Color.white),
+                        new SeasonInformation(Season.Spring, "春", "春 is spring", Color.red),
                     } as IEnumerable<SeasonInformation>
                 );
-            Container.BindInterfacesTo<SeasonTextMaster>().AsCached();
+            Container.BindInterfacesTo<SeasonMaster>().AsCached();
             Container.BindFactory<SeasonInformation, SeasonText, SeasonText.Factory.FromSeasonInformation>().AsCached();
+            Container.BindFactory<SeasonInformation, SeasonColor, SeasonColor.Factory.FromSeasonInformation>().AsCached();
         }
 
         [Test]
         public void Exists()
         {
-            var seasonTextMaster = Container.Resolve<ISeasonTextMaster>();
+            var seasonTextMaster = Container.Resolve<ISeasonMaster>();
             Assert.True(seasonTextMaster.Exists(Season.Spring));
             Assert.False(seasonTextMaster.Exists(Season.Summer));
         }
@@ -37,15 +38,17 @@ namespace RemoteSettingsSample.Domain.Entity
         [Test]
         public void Find()
         {
-            var seasonTextMaster = Container.Resolve<ISeasonTextMaster>();
+            var seasonTextMaster = Container.Resolve<ISeasonMaster>();
             Assert.IsInstanceOf<SeasonText>(seasonTextMaster.FindText(Season.Spring));
             Assert.IsInstanceOf<SeasonText>(seasonTextMaster.FindText(Season.Autumn));
             Assert.AreNotEqual(default(SeasonText), seasonTextMaster.FindText(Season.Spring));
             Assert.AreEqual(default(SeasonText), seasonTextMaster.FindText(Season.Autumn));
             Assert.AreEqual("春", seasonTextMaster.FindText(Season.Spring).Title);
             Assert.AreEqual("春 is spring", seasonTextMaster.FindText(Season.Spring).Body);
+            Assert.AreEqual(Color.red, seasonTextMaster.FindColor(Season.Spring).Color);
             Assert.AreEqual(null, seasonTextMaster.FindText(Season.Autumn).Title);
             Assert.AreEqual(null, seasonTextMaster.FindText(Season.Autumn).Body);
+            Assert.AreEqual(default(Color), seasonTextMaster.FindColor(Season.Autumn).Color);
         }
     }
 }

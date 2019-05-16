@@ -19,11 +19,11 @@ namespace RemoteSettingsSample.Application.Installer
         public override void InstallBindings()
         {
             // UseCases
-            Container.BindInterfacesTo<ChangeSeasonText>().AsCached();
+            Container.BindInterfacesTo<ChangeSeason>().AsCached();
             Container.BindInterfacesTo<HandleRemoteSetting>().AsCached();
 
             // Entities
-            Container.BindInterfacesTo<SeasonTextMaster>().AsCached();
+            Container.BindInterfacesTo<SeasonMaster>().AsCached();
             Container.BindInterfacesTo<SeasonState>().AsCached();
 
             // Presenters
