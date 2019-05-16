@@ -38,14 +38,14 @@ namespace RemoteSettingsSample.Domain.Entity
         public void Find()
         {
             var seasonTextMaster = Container.Resolve<ISeasonTextMaster>();
-            Assert.IsInstanceOf<SeasonText>(seasonTextMaster.Find(Season.Spring));
-            Assert.IsInstanceOf<SeasonText>(seasonTextMaster.Find(Season.Autumn));
-            Assert.AreNotEqual(default(SeasonText), seasonTextMaster.Find(Season.Spring));
-            Assert.AreEqual(default(SeasonText), seasonTextMaster.Find(Season.Autumn));
-            Assert.AreEqual("春", seasonTextMaster.Find(Season.Spring).Title);
-            Assert.AreEqual("春 is spring", seasonTextMaster.Find(Season.Spring).Body);
-            Assert.AreEqual(null, seasonTextMaster.Find(Season.Autumn).Title);
-            Assert.AreEqual(null, seasonTextMaster.Find(Season.Autumn).Body);
+            Assert.IsInstanceOf<SeasonText>(seasonTextMaster.FindText(Season.Spring));
+            Assert.IsInstanceOf<SeasonText>(seasonTextMaster.FindText(Season.Autumn));
+            Assert.AreNotEqual(default(SeasonText), seasonTextMaster.FindText(Season.Spring));
+            Assert.AreEqual(default(SeasonText), seasonTextMaster.FindText(Season.Autumn));
+            Assert.AreEqual("春", seasonTextMaster.FindText(Season.Spring).Title);
+            Assert.AreEqual("春 is spring", seasonTextMaster.FindText(Season.Spring).Body);
+            Assert.AreEqual(null, seasonTextMaster.FindText(Season.Autumn).Title);
+            Assert.AreEqual(null, seasonTextMaster.FindText(Season.Autumn).Body);
         }
     }
 }

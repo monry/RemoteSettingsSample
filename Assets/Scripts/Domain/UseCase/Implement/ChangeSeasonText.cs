@@ -24,7 +24,7 @@ namespace RemoteSettingsSample.Domain.UseCase.Implement
         {
             SeasonState
                 .Where(SeasonTextMaster.Exists)
-                .Select(SeasonTextMaster.Find)
+                .Select(SeasonTextMaster.FindText)
                 .Subscribe(SignalBus.Fire);
         }
     }

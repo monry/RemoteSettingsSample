@@ -6,6 +6,6 @@ namespace RemoteSettingsSample.Domain.UseCase.Interface.Entity
     public interface ISeasonTextMaster
     {
         bool Exists(Season season);
-        SeasonText Find(Season season);
+        SeasonText FindText(Season season);
     }
 }

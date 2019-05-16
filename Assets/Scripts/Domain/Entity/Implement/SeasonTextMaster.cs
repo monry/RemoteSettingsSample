@@ -21,7 +21,7 @@ namespace RemoteSettingsSample.Domain.Entity.Implement
         bool ISeasonTextMaster.Exists(Season season) =>
             SeasonTexts.Any(x => x.Season == season);
 
-        SeasonText ISeasonTextMaster.Find(Season season) =>
+        SeasonText ISeasonTextMaster.FindText(Season season) =>
             SeasonTextFactory.Create(SeasonTexts.FirstOrDefault(x => x.Season == season));
     }
 }
