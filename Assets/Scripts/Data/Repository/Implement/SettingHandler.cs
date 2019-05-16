@@ -24,7 +24,10 @@ namespace RemoteSettingsSample.Data.Repository.Implement
         IObservable<Unit> ISettingReloadable.OnReloadAsObservable() =>
             SettingReloader.OnReloadAsObservable();
 
-        Season ISettingReadable.ReadSeason() =>
-            (Season) SettingReader.ReadInt(Const.RemoteSettingKey.Season);
+        Season ISettingReadable.ReadSeason()
+        {
+            var value = (Season) SettingReader.ReadInt(Const.RemoteSettingKey.Season);
+            return Enum.IsDefined(typeof(Season), value) ? value : default;
+        }
     }
 }

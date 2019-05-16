@@ -8,7 +8,7 @@ namespace RemoteSettingsSample.Application.ValueObject
     public struct SeasonInformation
     {
         // Avoid CS0649 warnings
-        private SeasonInformation(Season season, string title, string body)
+        public SeasonInformation(Season season, string title, string body)
         {
             this.season = season;
             this.title = title;

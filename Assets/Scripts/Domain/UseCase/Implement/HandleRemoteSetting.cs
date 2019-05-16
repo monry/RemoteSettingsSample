@@ -28,12 +28,12 @@ namespace RemoteSettingsSample.Domain.UseCase.Implement
 
         void IInitializable.Initialize()
         {
-            RefreshHandler
-                .OnRefreshAsObservable()
-                .Subscribe(_ => SettingReloadable.Reload());
             SettingReloadable
                 .OnReloadAsObservable()
                 .Subscribe(_ => SeasonState.Value = SettingReadable.ReadSeason());
+            RefreshHandler
+                .OnRefreshAsObservable()
+                .Subscribe(_ => SettingReloadable.Reload());
         }
     }
 }
