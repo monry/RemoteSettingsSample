@@ -5,6 +5,7 @@ using RemoteSettingsSample.Application.Message;
 using RemoteSettingsSample.Application.ValueObject;
 using RemoteSettingsSample.Domain.Entity.Implement;
 using RemoteSettingsSample.Domain.UseCase.Interface.Entity;
+using UnityEngine;
 using Zenject;
 
 namespace RemoteSettingsSample.Domain.Entity
@@ -18,7 +19,7 @@ namespace RemoteSettingsSample.Domain.Entity
                 .BindInstance(
                     new List<SeasonInformation>
                     {
-                        new SeasonInformation(Season.Spring, "春", "春 is spring"),
+                        new SeasonInformation(Season.Spring, "春", "春 is spring", Color.white),
                     } as IEnumerable<SeasonInformation>
                 );
             Container.BindInterfacesTo<SeasonTextMaster>().AsCached();

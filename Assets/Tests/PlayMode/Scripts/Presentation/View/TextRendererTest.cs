@@ -13,12 +13,12 @@ using RemoteSettingsSample.Domain.UseCase.Interface.Repository;
 using RemoteSettingsSample.Presentation.Presenter.Implement;
 using RemoteSettingsSample.Presentation.Presenter.Interface.View;
 using UniRx;
+using UnityEngine;
 using UnityEngine.TestTools;
 using Zenject;
 
 namespace RemoteSettingsSample.Presentation.View
 {
-
     public class TextRendererTest : ZenjectIntegrationTestFixture
     {
         [SetUp]
@@ -45,15 +45,17 @@ namespace RemoteSettingsSample.Presentation.View
                 .BindInstance(
                     new List<SeasonInformation>
                     {
-                        new SeasonInformation(Season.Spring, "春", "春 is spring"),
+                        new SeasonInformation(Season.Spring, "春", "春 is spring", Color.white),
                     } as IEnumerable<SeasonInformation>
                 );
 
             // Messages
             Container.BindFactory<SeasonInformation, SeasonText, SeasonText.Factory.FromSeasonInformation>().AsCached();
+            Container.BindFactory<SeasonInformation, SeasonColor, SeasonColor.Factory.FromSeasonInformation>().AsCached();
 
             // Signals
             Container.DeclareSignal<SeasonText>();
+            Container.DeclareSignal<SeasonColor>();
         }
 
         [UnityTest]
