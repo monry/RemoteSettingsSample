@@ -50,3 +50,13 @@ git clone git@github.com:monry/RemoteSettingsSample.git
 | Key | `Season` | `RemoteSettings.GetInt(string key)` の引数 |
 | Type | Integer | プログラム側で `enum Season` にキャストします |
 | Value | `1..4` | 1: 春, 2: 夏, 3: 秋, 4: 冬 |
+
+## Libraries
+
+* [UniRx](https://github.com/neuecc/UniRx)
+* [Zenject](https://github.com/svermeulen/Extenject)
+* [Moq](https://github.com/moq/moq)
+
+## License
+
+[MIT License](LICENSE.txt)
