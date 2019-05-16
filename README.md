@@ -59,6 +59,10 @@ git clone git@github.com:monry/RemoteSettingsSample.git
 * [Zenject](https://github.com/svermeulen/Extenject)
 * [Moq](https://github.com/moq/moq)
 
+## Assets
+
+* [Noto Serif JP](https://fonts.google.com/specimen/Noto+Serif+JP)
+
 ## License
 
 [MIT License](LICENSE.txt)
