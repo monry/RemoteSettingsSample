@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Application.Installer;
 using Data.Repository.Interface.DataStore;
 using Moq;
 using NUnit.Framework;
@@ -7,9 +8,7 @@ using RemoteSettingsSample.Application.Enum;
 using RemoteSettingsSample.Application.Message;
 using RemoteSettingsSample.Application.ValueObject;
 using RemoteSettingsSample.Data.Repository.Implement;
-using RemoteSettingsSample.Domain.Entity.Implement;
-using RemoteSettingsSample.Domain.UseCase.Implement;
-using RemoteSettingsSample.Presentation.Presenter.Implement;
+using RemoteSettingsSample.Domain.UseCase.Interface.Repository;
 using RemoteSettingsSample.Presentation.Presenter.Interface.View;
 using UniRx;
 using UnityEngine;
@@ -25,18 +24,11 @@ namespace RemoteSettingsSample.Presentation.View
         {
             PreInstall();
 
-            // UseCases
-            Container.BindInterfacesTo<ChangeSeason>().AsCached();
-            Container.BindInterfacesTo<HandleRemoteSetting>().AsCached();
+            SeasonInstaller.Install(Container);
 
-            // Entities
-            Container.BindInterfacesTo<SeasonMaster>().AsCached();
-            Container.BindInterfacesTo<SeasonState>().AsCached();
-
-            // Presenters
-            Container.BindInterfacesTo<SampleScene>().AsCached();
-
-            // Repositories
+            // To overwrite at testcase
+            Container.Unbind<ISettingReloadable>();
+            Container.Unbind<ISettingReadable>();
             Container.BindInterfacesTo<SettingHandler>().AsCached();
 
             // ValueObjects
@@ -44,17 +36,9 @@ namespace RemoteSettingsSample.Presentation.View
                 .BindInstance(
                     new List<SeasonInformation>
                     {
-                        new SeasonInformation(Season.Spring, "春", "春 is spring", Color.red),
+                        new SeasonInformation(Season.Summer, "夏", "夏 is summer", Color.blue),
                     } as IEnumerable<SeasonInformation>
                 );
-
-            // Messages
-            Container.BindFactory<SeasonInformation, SeasonText, SeasonText.Factory.FromSeasonInformation>().AsCached();
-            Container.BindFactory<SeasonInformation, SeasonColor, SeasonColor.Factory.FromSeasonInformation>().AsCached();
-
-            // Signals
-            Container.DeclareSignal<SeasonText>();
-            Container.DeclareSignal<SeasonColor>();
         }
 
         [UnityTest]
@@ -71,7 +55,7 @@ namespace RemoteSettingsSample.Presentation.View
             Container.BindInstance(settingReloaderMock.Object);
 
             // enum Season の範囲内の値を返す
-            settingReaderMock.Setup(x => x.ReadInt(It.IsAny<string>())).Returns((int) Season.Spring);
+            settingReaderMock.Setup(x => x.ReadInt(It.IsAny<string>())).Returns((int) Season.Summer);
             Container.BindInstance(settingReaderMock.Object);
 
             refreshTriggerMock.Setup(x => x.OnTriggerAsObservable()).Returns(Observable.ReturnUnit());
@@ -86,9 +70,11 @@ namespace RemoteSettingsSample.Presentation.View
                     x =>
                     {
                         hasStreamed = true;
-                        Assert.AreEqual(Color.red, x.Color);
+                        Assert.AreEqual(Color.blue, x.Color);
                     }
                 );
+            // Avoid warning
+            Container.Resolve<SignalBus>().GetStream<SeasonText>().Subscribe();
 
             PostInstall();
 
