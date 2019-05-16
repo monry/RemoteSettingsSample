@@ -49,9 +49,11 @@ namespace RemoteSettingsSample.Application.Installer
 
             // Messages
             Container.BindFactory<SeasonInformation, SeasonText, SeasonText.Factory.FromSeasonInformation>().AsCached();
+            Container.BindFactory<SeasonInformation, SeasonColor, SeasonColor.Factory.FromSeasonInformation>().AsCached();
 
             // Signals
             Container.DeclareSignal<SeasonText>();
+            Container.DeclareSignal<SeasonColor>();
         }
     }
 }
