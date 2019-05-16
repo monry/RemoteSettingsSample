@@ -1,5 +1,6 @@
 using System;
 using JetBrains.Annotations;
+using RemoteSettingsSample.Application;
 using RemoteSettingsSample.Application.Message;
 using TMPro;
 using UniRx;
@@ -33,8 +34,9 @@ namespace RemoteSettingsSample.Presentation.View.Implement
             DisposableTypeWriter?.Dispose();
             DisposableTypeWriter = text
                 .ToObservable()
-                .Delay(TimeSpan.FromSeconds(0.25f))
-                .Subscribe(x => TextMeshProUGUI.text += x);
+                .Delay(TimeSpan.FromSeconds(Const.Time.IntervalTextTypeWriter))
+                .Subscribe(x => TextMeshProUGUI.text += x)
+                .AddTo(gameObject);
         }
     }
 }
