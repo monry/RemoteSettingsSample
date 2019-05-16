@@ -1,6 +1,6 @@
 # Unity RemoteSettings Demo
 
-<img alt="Screenshot" src="Documentations/Images/screenshot.png" width="50%">
+![Screenshot](Documentations/Images/screenshot.png)
 
 ## Summary
 
