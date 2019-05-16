@@ -20,7 +20,11 @@ namespace RemoteSettingsSample.Presentation.View.Implement
         [UsedImplicitly]
         private void Initialize(SignalBus signalBus)
         {
-            signalBus.GetStream<SeasonText>().Select(x => x.Body).Subscribe(RenderTextAsTypeWriter);
+            signalBus
+                .GetStream<SeasonText>()
+                .Select(x => x.Body)
+                .Subscribe(RenderTextAsTypeWriter)
+                .AddTo(gameObject);
         }
 
         private void RenderTextAsTypeWriter(string text)

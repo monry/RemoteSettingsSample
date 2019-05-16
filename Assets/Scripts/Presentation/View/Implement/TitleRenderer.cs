@@ -17,7 +17,10 @@ namespace RemoteSettingsSample.Presentation.View.Implement
         [UsedImplicitly]
         private void Initialize(SignalBus signalBus)
         {
-            signalBus.GetStream<SeasonText>().Subscribe(x => TextMeshProUGUI.SetText(x.Title));
+            signalBus
+                .GetStream<SeasonText>()
+                .Subscribe(x => TextMeshProUGUI.SetText(x.Title))
+                .AddTo(gameObject);
         }
     }
 }
