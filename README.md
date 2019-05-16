@@ -22,17 +22,17 @@ git clone git@github.com:monry/RemoteSettingsSample.git
 
 #### 2-1. Services タブを表示
 
-![Services タブ](Documentations/Images/services.png)
+<img alt="Services タブ" src="Documentations/Images/services.png" width="50%" />
 
 #### 2-2. プロジェクトを作成
 
 ##### まだ [Unity Services](https://developer.cloud.unity3d.com/) 上にプロジェクトを作成していない場合
 
-![プロジェクト作成](Documentations/Images/setup_01.gif)
+<img alt="プロジェクト作成" src="Documentations/Images/setup_01.gif" width="50%" />
 
 ##### 既にプロジェクトを作成している場合
 
-![プロジェクトリンク](Documentations/Images/setup_02.gif)
+<img alt="プロジェクトリンク" src="Documentations/Images/setup_02.gif" width="50%" />
 
 ### 3. Unity RemoteSettings を設定する
 
