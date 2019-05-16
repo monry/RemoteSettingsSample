@@ -3,9 +3,10 @@ using RemoteSettingsSample.Application.Message;
 
 namespace RemoteSettingsSample.Domain.UseCase.Interface.Entity
 {
-    public interface ISeasonTextMaster
+    public interface ISeasonMaster
     {
         bool Exists(Season season);
-        SeasonText Find(Season season);
+        SeasonText FindText(Season season);
+        SeasonColor FindColor(Season season);
     }
 }

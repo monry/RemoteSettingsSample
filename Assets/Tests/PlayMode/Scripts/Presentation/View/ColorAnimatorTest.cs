@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Application.Installer;
 using Data.Repository.Interface.DataStore;
@@ -17,7 +17,7 @@ using Zenject;
 
 namespace RemoteSettingsSample.Presentation.View
 {
-    public class TextRendererTest : ZenjectIntegrationTestFixture
+    public class ColorAnimatorTest : ZenjectIntegrationTestFixture
     {
         [SetUp]
         public void Install()
@@ -65,17 +65,16 @@ namespace RemoteSettingsSample.Presentation.View
 
             Container
                 .Resolve<SignalBus>()
-                .GetStream<SeasonText>()
+                .GetStream<SeasonColor>()
                 .Subscribe(
                     x =>
                     {
                         hasStreamed = true;
-                        Assert.AreEqual("夏", x.Title);
-                        Assert.AreEqual("夏 is summer", x.Body);
+                        Assert.AreEqual(Color.blue, x.Color);
                     }
                 );
             // Avoid warning
-            Container.Resolve<SignalBus>().GetStream<SeasonColor>().Subscribe();
+            Container.Resolve<SignalBus>().GetStream<SeasonText>().Subscribe();
 
             PostInstall();
 
@@ -83,36 +82,5 @@ namespace RemoteSettingsSample.Presentation.View
 
             yield break;
         }
-
-        [UnityTest]
-        public IEnumerator 正しい季節が取得出来なかった()
-        {
-            var settingReloaderMock = new Mock<ISettingReloader>();
-            var settingReaderMock = new Mock<ISettingReader>();
-            var refreshTriggerMock = new Mock<IRefreshTrigger>();
-
-            var subject = new Subject<Unit>();
-
-            settingReloaderMock.Setup(x => x.Reload()).Callback(() => subject.OnNext(Unit.Default));
-            settingReloaderMock.Setup(x => x.OnReloadAsObservable()).Returns(subject);
-            Container.BindInstance(settingReloaderMock.Object);
-
-            // enum Season の範囲外の値を返す
-            settingReaderMock.Setup(x => x.ReadInt(It.IsAny<string>())).Returns(100);
-            Container.BindInstance(settingReaderMock.Object);
-
-            refreshTriggerMock.Setup(x => x.OnTriggerAsObservable()).Returns(Observable.ReturnUnit());
-            Container.BindInstance(refreshTriggerMock.Object);
-
-            // Avoid warning
-            Container.Resolve<SignalBus>().GetStream<SeasonText>().Subscribe();
-
-            PostInstall();
-
-            Assert.AreEqual(default(Season), Container.Resolve<ISettingReadable>().ReadSeason());
-
-            yield break;
-        }
     }
-
 }

@@ -4,17 +4,17 @@ using Zenject;
 
 namespace RemoteSettingsSample.Domain.UseCase.Implement
 {
-    public class ChangeSeasonText : IInitializable
+    public class ChangeSeason : IInitializable
     {
-        public ChangeSeasonText(ISeasonTextMaster seasonTextMaster, ISeasonState seasonState, SignalBus signalBus)
+        public ChangeSeason(ISeasonMaster seasonMaster, ISeasonState seasonState, SignalBus signalBus)
         {
-            SeasonTextMaster = seasonTextMaster;
+            SeasonMaster = seasonMaster;
             SeasonState = seasonState;
             SignalBus = signalBus;
         }
 
         // Entities
-        private ISeasonTextMaster SeasonTextMaster { get; }
+        private ISeasonMaster SeasonMaster { get; }
         private ISeasonState SeasonState { get; }
 
         // Others
@@ -23,8 +23,12 @@ namespace RemoteSettingsSample.Domain.UseCase.Implement
         void IInitializable.Initialize()
         {
             SeasonState
-                .Where(SeasonTextMaster.Exists)
-                .Select(SeasonTextMaster.Find)
+                .Where(SeasonMaster.Exists)
+                .Select(SeasonMaster.FindText)
+                .Subscribe(SignalBus.Fire);
+            SeasonState
+                .Where(SeasonMaster.Exists)
+                .Select(SeasonMaster.FindColor)
                 .Subscribe(SignalBus.Fire);
         }
     }
