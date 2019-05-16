@@ -1,14 +1,14 @@
-using System.Drawing;
 using RemoteSettingsSample.Application.ValueObject;
+using UnityEngine;
 using Zenject;
 
 namespace RemoteSettingsSample.Application.Message
 {
     public struct SeasonColor
     {
-        public SeasonColor(Color color)
+        public SeasonColor(SeasonInformation seasonInformation)
         {
-            Color = color;
+            Color = seasonInformation.Color;
         }
 
         public Color Color { get; }

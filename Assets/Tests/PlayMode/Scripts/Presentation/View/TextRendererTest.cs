@@ -27,11 +27,11 @@ namespace RemoteSettingsSample.Presentation.View
             PreInstall();
 
             // UseCases
-            Container.BindInterfacesTo<ChangeSeasonText>().AsCached();
+            Container.BindInterfacesTo<ChangeSeason>().AsCached();
             Container.BindInterfacesTo<HandleRemoteSetting>().AsCached();
 
             // Entities
-            Container.BindInterfacesTo<SeasonTextMaster>().AsCached();
+            Container.BindInterfacesTo<SeasonMaster>().AsCached();
             Container.BindInterfacesTo<SeasonState>().AsCached();
 
             // Presenters
