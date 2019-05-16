@@ -7,20 +7,22 @@ namespace RemoteSettingsSample.Application.ValueObject
     [Serializable]
     public struct SeasonInformation
     {
-        // Avoid CS0649 warnings
-        public SeasonInformation(Season season, string title, string body)
+        public SeasonInformation(Season season, string title, string body, Color color)
         {
             this.season = season;
             this.title = title;
             this.body = body;
+            this.color = color;
         }
 
         [SerializeField] private Season season;
         [SerializeField] private string title;
         [SerializeField] private string body;
+        [SerializeField] private Color color;
 
         public Season Season => season;
         public string Title => title;
         public string Body => body;
+        public Color Color => color;
     }
 }
