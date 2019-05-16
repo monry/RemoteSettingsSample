@@ -6,6 +6,8 @@
 
 2019/05/18 (Sat) に開催された「[Unity の集い in 大阪](https://meetup.unity3d.jp/jp/events/1063)」で用いたデモプロジェクトです。
 
+Unity RemoteSettings にて設定した季節の値に応じて、枕草子のテキストを切り替えて表示します。
+
 ## Requirements
 
 * Unity 2019.1
