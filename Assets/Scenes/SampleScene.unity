@@ -206,7 +206,6 @@ GameObject:
   - component: {fileID: 186728345}
   - component: {fileID: 186728344}
   - component: {fileID: 186728343}
-  - component: {fileID: 186728346}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -282,24 +281,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186728341}
   m_CullTransparentMesh: 0
---- !u!114 &186728346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186728341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 186728343}
-  _identifier: 
-  _useSceneContext: 1
-  _context: {fileID: 0}
-  _bindType: 1
 --- !u!1 &329934498
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,7 +422,6 @@ GameObject:
   - component: {fileID: 347258277}
   - component: {fileID: 347258276}
   - component: {fileID: 347258278}
-  - component: {fileID: 347258279}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -602,24 +582,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566373d7932647cf946f68922e79bc5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &347258279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347258274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 347258278}
-  _identifier: 
-  _useSceneContext: 1
-  _context: {fileID: 0}
-  _bindType: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,7 +953,6 @@ GameObject:
   - component: {fileID: 2046866374}
   - component: {fileID: 2046866373}
   - component: {fileID: 2046866375}
-  - component: {fileID: 2046866376}
   m_Layer: 5
   m_Name: Season
   m_TagString: Untagged
@@ -1152,21 +1113,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729950abd853431a8bdb209b12599051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2046866376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046866371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 2046866375}
-  _identifier: 
-  _useSceneContext: 1
-  _context: {fileID: 0}
-  _bindType: 1
